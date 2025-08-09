@@ -177,5 +177,31 @@ class viewsets_reservation(viewsets.ModelViewSet):
 
 
 #8 find movie 
+@api_view(['GET'])
+def find_movie(request):
+    movies = Movie.objects.filter(
+        hall = request.data['hall'],
+        movie = request.data['movie'],
+    )
+    serializer = MovieSerlializer(movies, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 #9 create new reservation
+@api_view(['POST'])
+def new_reservation(request):
+    movie = Movie.onjects.get(
+        hall = request.data['hall'],
+        movie = request.data['movie'],
+        date = request.data['date'],
+        )
+    guest = Guest()
+    guest.name = request.data['name']
+    guest.mobile = request.data['mobile']
+    guest.save()
+    
+    Reservation = Reservation()
+    Reservation.movie = movie
+    Reservation.guest = guest
+    Reservation.save()
+    serializer = ReservationSerializer(Reservation)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)

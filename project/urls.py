@@ -56,7 +56,13 @@ urlpatterns = [
     # 6.2 generic get retrieve update delete
     path('rest/generic/<int:pk>/', views.Generic_pK.as_view()),
 
-    #viewsets
-    path('rest/viewsets/', include(router.urls))
+    #7 viewsets
+    path('rest/viewsets/', include(router.urls)),
+
+    # 8 find movie
+     path('fbv/findmovie/', views.find_movie),
+
+     # new reservation
+     path('fbv/newreservation/', views.new_reservation),
 
 ]
